@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-
-<!-- 
-    This is a reasonable starting point for the HTML in Mock.
-    Feel free to modify this as you wish.
--->
-
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
     <title>Mock</title>
-    <link rel="stylesheet" href="src/styles/main.css" type="text/css">
-</head>
-<body>
-    <!-- Tell the browser what to show if JavaScript/TypeScript is disabled. -->
-    <noscript>This example requires JavaScript to run.</noscript>
-    <!-- Prepare a region of the page to hold the entire interface, managed by React -->
-    <div id="root"></div>
-    <script type="module" src="src/index.tsx"></script>
-</body>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>Mock</h1>
+    </div>
+    <div class="repl">
+      <div class="repl-history"></div>
+      <hr />
+      <div class="repl-input">
+        <input type="text" class="repl-command-box" placeholder="Enter command here!"/>
+      </div>
+      <button id="button">Submit</button>
+    </div>
+  </body>
 </html>
