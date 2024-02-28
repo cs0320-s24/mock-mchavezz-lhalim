@@ -1,41 +1,60 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../styles/App.css";
-import REPL from "./REPL";
+import { useCSVHandler } from "<./CSVHandler";
 
 type Mode = "brief" | "verbose";
-
-interface Dataset {
-  name: string;
-  data: string[][];
-}
 
 function App() {
   const [history, setHistory] = useState<string[]>([]);
   const [mode, setMode] = useState<Mode>("brief");
-  const [currentDataset, setCurrentDataset] = useState<Dataset | null>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const { currentDataset, loadCSV, unloadCSV } = useCSVHandler();
 
   const handleCommand = (command: string) => {
     const [action, ...args] = command.split(" ");
     switch (action) {
+      case "login":
+        handleLogin(args[0], args[1]);
+        break;
+      case "logout":
+        handleLogout();
+        break;
       case "load_file":
-        const filePath = args.join(" ");
-        loadCSV(filePath);
+        if (loggedIn) {
+          const filePath = args.join(" ");
+          const loadResult = loadCSV(filePath);
+          addToHistory(loadResult);
+        } else {
+          addToHistory("Error: Please log in to access this feature.");
+        }
+        break;
+      case "unload_file":
+        if (loggedIn) {
+          const unloadResult = unloadCSV();
+          addToHistory(unloadResult);
+        } else {
+          addToHistory("Error: Please log in to access this feature.");
+        }
         break;
       default:
         addToHistory(`Invalid command: ${command}`);
     }
   };
 
-  const loadCSV = (filePath: string) => {
-    // You can implement CSV parsing logic here
-    // Assume you parse the CSV into a 2D array called 'csvData'
-    const csvData: string[][] = [
-      ["Name", "Age"],
-      ["John", "30"],
-      ["Jane", "25"],
-    ];
-    setCurrentDataset({ name: filePath, data: csvData });
-    addToHistory(`CSV file '${filePath}' loaded successfully.`);
+  const handleLogin = (username: string, password: string) => {
+    // Perform login authentication here
+    // For simplicity, let's assume any non-empty username/password is valid
+    if (username && password) {
+      setLoggedIn(true);
+      addToHistory("Login successful.");
+    } else {
+      addToHistory("Error: Invalid username or password.");
+    }
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    addToHistory("Logged out.");
   };
 
   const addToHistory = (output: string) => {
@@ -79,12 +98,21 @@ function App() {
           Verbose Mode
         </label>
       </div>
+      <div className="login">
+        {loggedIn ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          <div>
+            <input type="text" placeholder="Username" id="username" />
+            <input type="password" placeholder="Password" id="password" />
+            <button onClick={() => handleLogin((document.getElementById("username") as HTMLInputElement).value, (document.getElementById("password") as HTMLInputElement).value)}>Login</button>
+          </div>
+        )}
+      </div>
       {currentDataset && (
         <div className="dataset-info">
           <h2>Current Dataset: {currentDataset.name}</h2>
-          <button onClick={() => setCurrentDataset(null)}>
-            Unload Dataset
-          </button>
+          <button onClick={unloadCSV}>Unload Dataset</button>
         </div>
       )}
     </div>
