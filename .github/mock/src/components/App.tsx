@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/App.css";
-import { useCSVHandler } from "<./CSVHandler";
+import { useCSVHandler } from "../components/CSVHandler";
 
 type Mode = "brief" | "verbose";
 
