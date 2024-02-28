@@ -1,11 +1,18 @@
 .App {
   text-align: center;
-  background-color: #282c34; /* Background color for the entire application */
-  min-height: 100vh; /* Minimum height to fill the entire viewport */
+}
+
+.App-header {
+  background-color: #1e90ff; 
+  height: 8vh; 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(1px + 2vmin);
   color: white;
+  font-size: 1.5rem; 
+  padding: 20px; 
+}
+
+.App-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
