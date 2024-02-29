@@ -26,7 +26,13 @@ Explanations for checkstyle errors (hopefully none)
 
 # Tests
 
-Explain the testing suites that you implemented for your program and how each test ensures that a part of the program works. 
+Unit tests:
+    testCSVHandler:
+    - viewCSV should return HTML table representation of the current dataset
+    - switchDataset should switch to the specified dataset"
+    - unloadCSV should unload the current dataset
+    - loadCSV should load a CSV file successfully
+
 
 # How to
 
