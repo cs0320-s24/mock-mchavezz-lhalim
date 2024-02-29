@@ -91,10 +91,6 @@ export function useCSVHandler(): CSVHandler {
   };
 
 
-
-
-
-
   return {
     loadedDatasets,
     currentDataset:
