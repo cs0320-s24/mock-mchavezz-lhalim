@@ -75,14 +75,13 @@ export function useCSVHandler(): CSVHandler {
 
       tableHTML += "</tr></thead><tbody>";
 
-      for (let i = 0; i < currentDataset.data.length; i++) {
-        // Adjusted loop to include all rows
+      currentDataset.data.forEach((row) => {
         tableHTML += "<tr>";
-        currentDataset.data[i].forEach((cell) => {
+        row.forEach((cell) => {
           tableHTML += `<td>${cell}</td>`;
         });
         tableHTML += "</tr>";
-      }
+      });
 
       tableHTML += "</tbody></table>";
       return tableHTML;
@@ -90,6 +89,7 @@ export function useCSVHandler(): CSVHandler {
 
     return "No dataset is currently loaded.";
   };
+
 
 
 

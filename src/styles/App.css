@@ -3,16 +3,69 @@
 }
 
 .App-header {
-  background-color: #1e90ff; 
+  background-color: #f0f0f0; 
   height: 8vh; 
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #333;
   font-size: 1.5rem; 
   padding: 20px; 
-}
-
-.App-header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.top-section {
+  background-color: #9269af; 
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-section img {
+  height: 50px;
+}
+
+.contact-info p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #333; 
+}
+
+.logo {
+  background-color: #f0f0f0; 
+  color: #6a0dad; 
+  font-size: 24px; 
+  padding: 10px 20px; 
+  border-radius: 5px;
+}
+
+.bottom-section {
+  background-color: #9269af; 
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.bottom-section h2 {
+  color: #333; 
+}
+
+.about-us, .contact-info {
+  width: calc(50% - 10px); 
+}
+
+.about-us p, .contact-info p {
+  margin: 10px 0;
+}
+
+.contact-info a {
+  color: #1e90ff; 
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+

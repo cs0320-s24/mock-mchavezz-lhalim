@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/App.css";
-import { useCSVHandler, Dataset } from "../components/CSVHandler"; // Import Dataset type
+import { useCSVHandler, Dataset } from "../components/CSVHandler"; 
 
 type Mode = "brief" | "verbose";
 
@@ -8,7 +8,7 @@ function App() {
   const [history, setHistory] = useState<string[]>([]);
   const [mode, setMode] = useState<Mode>("brief");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const { currentDataset, loadCSV, unloadCSV, viewCSV } = useCSVHandler(); // Import the CSV handling functions
+  const { currentDataset, loadCSV, unloadCSV, viewCSV } = useCSVHandler(); 
 
   const handleCommand = (command: string) => {
     const [action, ...args] = command.split(" ");
@@ -39,7 +39,7 @@ function App() {
       case "view":
         if (loggedIn) {
           const viewResult = viewCSV();
-          console.log("View Result:", viewResult); // Log the view result
+          console.log("View Result:", viewResult); 
           if (viewResult && viewResult !== "No dataset is currently loaded.") {
             addToHistory(viewResult);
           } else {
@@ -54,9 +54,7 @@ function App() {
     }
   };
 
-  const handleLogin = (username: string, password: string) => {
-    // Perform login authentication here
-    // For simplicity, let's assume any non-empty username/password is valid
+  const handleLogin = (username: string, password: string) => { //should we have any restriction on login?
     if (username && password) {
       setLoggedIn(true);
       addToHistory("Login successful.");
@@ -78,39 +76,15 @@ function App() {
     setMode((prevMode) => (prevMode === "brief" ? "verbose" : "brief"));
   };
 
-  const renderHTMLTable = () => {
-  if (!currentDataset || !currentDataset.data || !currentDataset.headers) {
-    return <div>No dataset loaded</div>;
-  }
-
-  const tableHTML = `
-    <div>
-      <h2>${currentDataset.name}</h2>
-      <table className="csv-table">
-        <thead>
-          <tr>
-            ${currentDataset.headers.map((header, index) => `<th>${header}</th>`).join("")}
-          </tr>
-        </thead>
-        <tbody>
-          ${currentDataset.data.map((row) => `
-            <tr>
-              ${row.map((cell) => `<td>${cell}</td>`).join("")}
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-
-  return <div dangerouslySetInnerHTML={{ __html: tableHTML }} />;
-};
-
-
-
-
   return (
     <div className="App">
+      <div className="top-section">
+        <div className="logo">&</div>{" "}
+        <div className="contact-info">
+          <p>Phone: 401-777-8888</p>
+          <p>Address: 69 Brown Street, Providence, RI, USA 02912</p>
+        </div>
+      </div>
       <h1>Real Estate Appraisal Command Prompt</h1>
       <div className="history">
         {history.map((output, index) => (
@@ -119,19 +93,21 @@ function App() {
           </div>
         ))}
       </div>
-      <div className="input">
-        <input
-          type="text"
-          placeholder="Enter command..."
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const command = e.currentTarget.value;
-              handleCommand(command);
-              e.currentTarget.value = "";
-            }
-          }}
-        />
-      </div>
+      {loggedIn && ( 
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Enter command..."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const command = e.currentTarget.value;
+                handleCommand(command);
+                e.currentTarget.value = "";
+              }
+            }}
+          />
+        </div>
+      )}
       <div className="mode-toggle">
         <label>
           <input
@@ -173,9 +149,34 @@ function App() {
       {loggedIn && currentDataset && history.includes("view") && (
         <div className="csv-viewer">
           <h2>CSV Viewer</h2>
-          {renderHTMLTable()}
+          {viewCSV()}
         </div>
       )}
+      <div className="bottom-section">
+        <div className="about-us">
+          <h2>About Us</h2>
+          <p>
+            As a real estate appraiser, I am responsible for assessing the
+            market value of a property. I am licensed to appraise one- to
+            four-family homes. I work on behalf of my appraisal firm and am
+            unconnected to the local homeowners, lawyers, and larger banks that
+            hire me. While much of my time is spent on-site evaluating the
+            property itself, part of my job is also to consider similar
+            properties in the neighborhood and surrounding area, because they
+            influence the value of the property I am assessing. 
+          </p>
+        </div>
+        <div className="contact-info">
+          <h2>Contact Us</h2>
+          <p>
+            Email:{" "}
+            <a href="mailto:your-email@example.com">contact_us@brown.edu</a>
+          </p>
+          <p>
+            Phone: <a href="tel:+1234567890">+1 (401) 777-8888</a>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

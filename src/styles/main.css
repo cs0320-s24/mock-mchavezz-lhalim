@@ -27,21 +27,20 @@
 }
 
 button {
-  margin: auto;
+  margin: 10px auto; 
   display: block;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #1e90ff; 
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.25s;
-  margin-top: 10px; 
 }
 button:hover {
-  background-color: #292929; 
+  background-color: #4ca6ff; 
 }
 button:focus,
 button:focus-visible {
@@ -49,5 +48,5 @@ button:focus-visible {
 }
 
 button:focus {
-  outline: 2px solid #646cff; /* Added focus ring for better accessibility */
+  outline: 2px solid #646cff;
 }
