@@ -54,14 +54,18 @@ function App() {
     }
   };
 
-  const handleLogin = (username: string, password: string) => { //should we have any restriction on login?
-    if (username && password) {
-      setLoggedIn(true);
-      addToHistory("Login successful.");
-    } else {
-      addToHistory("Error: Invalid username or password.");
-    }
-  };
+const handleLogin = (username: string, password: string) => {
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  if (username && password && password.match(passwordRegex)) {
+    setLoggedIn(true);
+    addToHistory("Login successful.");
+  } else {
+    addToHistory(
+      "Error: Invalid username or password. Password must be at least 8 characters long and include one number and one special character."
+    );
+  }
+};
+
 
   const handleLogout = () => {
     setLoggedIn(false);
