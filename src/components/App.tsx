@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/App.css";
-import { useCSVHandler } from "../components/CSVHandler";
+import { useCSVHandler, Dataset } from "../components/CSVHandler"; // Import Dataset type
 
 type Mode = "brief" | "verbose";
 
@@ -8,7 +8,7 @@ function App() {
   const [history, setHistory] = useState<string[]>([]);
   const [mode, setMode] = useState<Mode>("brief");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const { currentDataset, loadCSV, unloadCSV } = useCSVHandler();
+  const { currentDataset, loadCSV, unloadCSV, viewCSV } = useCSVHandler(); // Import the CSV handling functions
 
   const handleCommand = (command: string) => {
     const [action, ...args] = command.split(" ");
@@ -19,7 +19,7 @@ function App() {
       case "logout":
         handleLogout();
         break;
-      case "load_file":
+      case "load_csv":
         if (loggedIn) {
           const filePath = args.join(" ");
           const loadResult = loadCSV(filePath);
@@ -28,10 +28,23 @@ function App() {
           addToHistory("Error: Please log in to access this feature.");
         }
         break;
-      case "unload_file":
+      case "unload_csv":
         if (loggedIn) {
           const unloadResult = unloadCSV();
           addToHistory(unloadResult);
+        } else {
+          addToHistory("Error: Please log in to access this feature.");
+        }
+        break;
+      case "view":
+        if (loggedIn) {
+          const viewResult = viewCSV();
+          console.log("View Result:", viewResult); // Log the view result
+          if (viewResult && viewResult !== "No dataset is currently loaded.") {
+            addToHistory(viewResult);
+          } else {
+            addToHistory("Error: No dataset loaded or dataset is empty.");
+          }
         } else {
           addToHistory("Error: Please log in to access this feature.");
         }
@@ -64,6 +77,37 @@ function App() {
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "brief" ? "verbose" : "brief"));
   };
+
+  const renderHTMLTable = () => {
+  if (!currentDataset || !currentDataset.data || !currentDataset.headers) {
+    return <div>No dataset loaded</div>;
+  }
+
+  const tableHTML = `
+    <div>
+      <h2>${currentDataset.name}</h2>
+      <table className="csv-table">
+        <thead>
+          <tr>
+            ${currentDataset.headers.map((header, index) => `<th>${header}</th>`).join("")}
+          </tr>
+        </thead>
+        <tbody>
+          ${currentDataset.data.map((row) => `
+            <tr>
+              ${row.map((cell) => `<td>${cell}</td>`).join("")}
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  return <div dangerouslySetInnerHTML={{ __html: tableHTML }} />;
+};
+
+
+
 
   return (
     <div className="App">
@@ -105,7 +149,18 @@ function App() {
           <div>
             <input type="text" placeholder="Username" id="username" />
             <input type="password" placeholder="Password" id="password" />
-            <button onClick={() => handleLogin((document.getElementById("username") as HTMLInputElement).value, (document.getElementById("password") as HTMLInputElement).value)}>Login</button>
+            <button
+              onClick={() =>
+                handleLogin(
+                  (document.getElementById("username") as HTMLInputElement)
+                    .value,
+                  (document.getElementById("password") as HTMLInputElement)
+                    .value
+                )
+              }
+            >
+              Login
+            </button>
           </div>
         )}
       </div>
@@ -113,6 +168,12 @@ function App() {
         <div className="dataset-info">
           <h2>Current Dataset: {currentDataset.name}</h2>
           <button onClick={unloadCSV}>Unload Dataset</button>
+        </div>
+      )}
+      {loggedIn && currentDataset && history.includes("view") && (
+        <div className="csv-viewer">
+          <h2>CSV Viewer</h2>
+          {renderHTMLTable()}
         </div>
       )}
     </div>
