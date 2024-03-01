@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "/Users/linahalim/Desktop/cs0320/mock-mchavezz-lhalim/src/mocked_dataJson";
+import "/Users/fernandachavez/Desktop/cs32/mock-mchavezz-lhalim/src/mocked_dataJson";
 import {
   mocked_data,
   mocked_data_2,
@@ -7,7 +7,7 @@ import {
   mocked_data_4,
   mocked_data_5,
   mocked_data_6,
-} from "/Users/linahalim/Desktop/cs0320/mock-mchavezz-lhalim/src/mocked_dataJson";
+} from "/Users/fernandachavez/Desktop/cs32/mock-mchavezz-lhalim/src/mocked_dataJson";
 import { mock } from "node:test";
 
 export interface Dataset {
