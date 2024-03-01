@@ -1,7 +1,7 @@
 
 # Project Details
 Mock
-By: Lina Halim (lhalim) and Maria Chavezz (mchavezz)
+By: Lina Halim (lhalim) and Maria Chavez (mchavezz)
 Time spent on project: 8 hours each (16 total)
 Include the total estimated time it took to complete project
 (https://github.com/cs0320-s24/mock-mchavezz-lhalim.git)
@@ -18,7 +18,11 @@ Include the total estimated time it took to complete project
 - Toggle Verbose/Brief: for accessibility, the mode is a toggle that can be checked by the user that shows the current mode, brief is the default mode
 - Current Dataset display: as only one dataset can be loaded at a time, the current dataset name is displayed
 - Unload CSV button: after a CSV is loaded, not only can the user use the unload_csv command, a button also appears
-
+- Login button functionality: 
+    - added a loggedIn state variable to keep track of the user's authentication status.
+    - handleLogin function toggles the loggedIn state when the user clicks on the login button.
+    - handleCommand function checks whether the user is logged in before processing commands. If not logged in, it adds a message to the history instead of executing the command.
+    - command input and mode toggle components are only rendered when the user is logged in.
 
 # Errors/Bugs
 
@@ -58,3 +62,5 @@ view csv html formatting documentation:
 https://www.w3schools.com/html/html_tables.asp
 inspo for visuals of the website:
 http://scottirealtyri.com/index.php/page/appraisals
+
+Also collaborated conceptually with Korey Sam and looked at snippets of code from Nahum Yedegho.  
