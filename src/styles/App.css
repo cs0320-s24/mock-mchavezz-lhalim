@@ -3,19 +3,19 @@
 }
 
 .App-header {
-  background-color: #f0f0f0; 
-  height: 8vh; 
+  background-color: #f0f0f0;
+  height: 8vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #333;
-  font-size: 1.5rem; 
-  padding: 20px; 
+  font-size: 1.5rem;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-section {
-  background-color: #9269af; 
+  background-color: #9269af;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -29,19 +29,19 @@
 .contact-info p {
   margin: 0;
   font-size: 0.9em;
-  color: #333; 
+  color: #333;
 }
 
 .logo {
-  background-color: #f0f0f0; 
-  color: #6a0dad; 
-  font-size: 24px; 
-  padding: 10px 20px; 
+  background-color: #f0f0f0;
+  color: #6a0dad;
+  font-size: 24px;
+  padding: 10px 20px;
   border-radius: 5px;
 }
 
 .bottom-section {
-  background-color: #9269af; 
+  background-color: #9269af;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -49,19 +49,21 @@
 }
 
 .bottom-section h2 {
-  color: #333; 
+  color: #333;
 }
 
-.about-us, .contact-info {
-  width: calc(50% - 10px); 
+.about-us,
+.contact-info {
+  width: calc(50% - 10px);
 }
 
-.about-us p, .contact-info p {
+.about-us p,
+.contact-info p {
   margin: 10px 0;
 }
 
 .contact-info a {
-  color: #1e90ff; 
+  color: #1e90ff;
   text-decoration: none;
 }
 
@@ -71,20 +73,20 @@
 
 .csv-viewer table {
   border-collapse: collapse;
-  width: 100%;
-  border: 2px solid #000; 
-  background-color: #ffffff; 
+  width: 75%;
+  margin: 0 auto;
+  border: 2px solid #000;
+  background-color: #ffffff;
+  margin-bottom: 20px;
 }
 
-.csv-viewer th, .csv-viewer td {
-  border: 2px solid #000; 
-  padding: 12px; 
+.csv-viewer th,
+.csv-viewer td {
+  border: 2px solid #000;
+  padding: 12px;
   text-align: left;
 }
 
 .csv-viewer th {
-  background-color: #f2f2f2; 
+  background-color: #f2f2f2;
 }
-
-
-
