@@ -6,6 +6,7 @@ export interface Dataset {
   headers: string[];
 }
 
+
 export interface CSVHandler {
   loadedDatasets: Dataset[];
   currentDataset: Dataset | null;
@@ -13,10 +14,11 @@ export interface CSVHandler {
   loadCSV: (filePath: string) => string;
   unloadCSV: () => string;
   switchDataset: (index: number) => string;
-  viewCSV: () => string;
+  viewCSV: (props: Dataset) => JSX.Element | string;
 }
 
 export function useCSVHandler(): CSVHandler {
+
   const [loadedDatasets, setLoadedDatasets] = useState<Dataset[]>([]);
   const [currentDatasetIndex, setCurrentDatasetIndex] = useState<number | null>(
     null
@@ -63,32 +65,21 @@ export function useCSVHandler(): CSVHandler {
     return "Invalid dataset index.";
   };
 
-  const viewCSV = () => {
+  const viewCSV = (props: Dataset) => {
     if (currentDatasetIndex !== null) {
-      const currentDataset = loadedDatasets[currentDatasetIndex];
-      let tableHTML = `<h2>${currentDataset.name}</h2><table><thead><tr>`;
-
-      currentDataset.headers.forEach((header) => {
-        // Use headers from the dataset
-        tableHTML += `<th>${header}</th>`;
-      });
-
-      tableHTML += "</tr></thead><tbody>";
-
-      currentDataset.data.forEach((row) => {
-        tableHTML += "<tr>";
-        row.forEach((cell) => {
-          tableHTML += `<td>${cell}</td>`;
-        });
-        tableHTML += "</tr>";
-      });
-
-      tableHTML += "</tbody></table>";
-      return tableHTML;
+      return (<table>
+          {props.data
+            .map((row, index) => <tr>{row}</tr>)
+            .map((element, index) => (
+              <td>{element}</td>
+            ))}
+         </table>
+      );
     }
 
     return "No dataset is currently loaded.";
   };
+  
 
 
 
@@ -103,6 +94,6 @@ export function useCSVHandler(): CSVHandler {
     loadCSV,
     unloadCSV,
     switchDataset,
-    viewCSV,
+    viewCSV
   };
 }

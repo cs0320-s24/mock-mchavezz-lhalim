@@ -37,11 +37,11 @@ function App() {
         }
         break;
       case "view":
-        if (loggedIn) {
-          const viewResult = viewCSV();
+        if (loggedIn && currentDataset != null) {
+          const viewResult = viewCSV(currentDataset);
           console.log("View Result:", viewResult); 
           if (viewResult && viewResult !== "No dataset is currently loaded.") {
-            addToHistory(viewResult);
+            addToHistory("CSV displayed");
           } else {
             addToHistory("Error: No dataset loaded or dataset is empty.");
           }
@@ -80,6 +80,8 @@ const handleLogin = (username: string, password: string) => {
     setMode((prevMode) => (prevMode === "brief" ? "verbose" : "brief"));
   };
 
+  
+
   return (
     <div className="App">
       <div className="top-section">
@@ -97,7 +99,7 @@ const handleLogin = (username: string, password: string) => {
           </div>
         ))}
       </div>
-      {loggedIn && ( 
+      {loggedIn && (
         <div className="input">
           <input
             type="text"
@@ -150,10 +152,10 @@ const handleLogin = (username: string, password: string) => {
           <button onClick={unloadCSV}>Unload Dataset</button>
         </div>
       )}
-      {loggedIn && currentDataset && history.includes("view") && (
+      {loggedIn && currentDataset && history.includes("CSV displayed") && (
         <div className="csv-viewer">
           <h2>CSV Viewer</h2>
-          {viewCSV()}
+          {viewCSV(currentDataset)}
         </div>
       )}
       <div className="bottom-section">
@@ -167,7 +169,7 @@ const handleLogin = (username: string, password: string) => {
             hire me. While much of my time is spent on-site evaluating the
             property itself, part of my job is also to consider similar
             properties in the neighborhood and surrounding area, because they
-            influence the value of the property I am assessing. 
+            influence the value of the property I am assessing.
           </p>
         </div>
         <div className="contact-info">
