@@ -1,5 +1,12 @@
 import { expect, test } from "vitest";
+<<<<<<< HEAD
 import { useCSVHandler, Dataset } from "/Users/fernandachavez/Desktop/cs32/mock-mchavezz-lhalim/src/components/REPLFunction";
+=======
+import {
+  useCSVHandler,
+  Dataset,
+} from "/Users/linahalim/Desktop/cs0320/mock-mchavezz-lhalim/src/components/REPLFunction.tsx";
+>>>>>>> edcabfee44d7defd182800904c9ddf8f5a603eb2
 
 test("loadCSV should load a CSV file successfully", () => {
   const { loadCSV } = useCSVHandler();
@@ -30,15 +37,4 @@ test("switchDataset should switch to the specified dataset", () => {
   const result = switchDataset(0);
 
   expect(result).toBe(`Switched to dataset '${filePath1}'.`);
-});
-
-test("viewCSV should return HTML table representation of the current dataset", () => {
-  const { loadCSV, viewCSV } = useCSVHandler();
-  const filePath = "test.csv";
-
-  loadCSV(filePath);
-  const expectedHTML = `<h2>${filePath}</h2><table><thead><tr><th>Name</th><th>Age</th></tr></thead><tbody><tr><td>John</td><td>30</td></tr><tr><td>Jane</td><td>25</td></tr></tbody></table>`;
-  const result = viewCSV();
-
-  expect(result).toBe(expectedHTML);
 });
