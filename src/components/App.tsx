@@ -167,13 +167,13 @@ function App() {
       </div>
       {currentDataset && (
         <div className="dataset-info">
-          <h2>Current Dataset: {currentDataset.name}</h2>
+          <h2>Current Dataset Filepath: {currentDataset.name}</h2>
           <button onClick={unloadCSV}>Unload Dataset</button>
         </div>
       )}
       {currentDataset && history.includes("CSV displayed") && (
         <div className="csv-viewer">
-          <h2>CSV Viewer</h2>
+          <h2>Current Dataset Preview:</h2>
           {viewCSV(currentDataset)}
         </div>
       )}
