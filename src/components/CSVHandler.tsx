@@ -7,7 +7,7 @@ export interface Dataset {
 }
 
 
-export interface CSVHandler {
+export interface REPLFunction {
   loadedDatasets: Dataset[];
   currentDataset: Dataset | null;
   currentDatasetIndex: number | null;
@@ -17,8 +17,7 @@ export interface CSVHandler {
   viewCSV: (props: Dataset) => JSX.Element | string;
 }
 
-export function useCSVHandler(): CSVHandler {
-
+export function useCSVHandler(): REPLFunction {
   const [loadedDatasets, setLoadedDatasets] = useState<Dataset[]>([]);
   const [currentDatasetIndex, setCurrentDatasetIndex] = useState<number | null>(
     null
@@ -46,7 +45,7 @@ export function useCSVHandler(): CSVHandler {
   const unloadCSV = () => {
     if (currentDatasetIndex !== null) {
       const updatedDatasets = [...loadedDatasets];
-      updatedDatasets.splice(currentDatasetIndex, 1); 
+      updatedDatasets.splice(currentDatasetIndex, 1);
       setLoadedDatasets(updatedDatasets);
       setCurrentDatasetIndex(null);
 
@@ -67,24 +66,19 @@ export function useCSVHandler(): CSVHandler {
 
   const viewCSV = (props: Dataset) => {
     if (currentDatasetIndex !== null) {
-      return (<table>
+      return (
+        <table>
           {props.data
             .map((row, index) => <tr>{row}</tr>)
             .map((element, index) => (
               <td>{element}</td>
             ))}
-         </table>
+        </table>
       );
     }
 
     return "No dataset is currently loaded.";
   };
-  
-
-
-
-
-
 
   return {
     loadedDatasets,
@@ -94,6 +88,6 @@ export function useCSVHandler(): CSVHandler {
     loadCSV,
     unloadCSV,
     switchDataset,
-    viewCSV
+    viewCSV,
   };
 }

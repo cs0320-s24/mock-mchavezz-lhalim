@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/App.css";
-import { useCSVHandler, Dataset } from "../components/CSVHandler"; 
+import { useCSVHandler, Dataset } from "../components/CSVHandler";
 
 type Mode = "brief" | "verbose";
 
@@ -8,7 +8,7 @@ function App() {
   const [history, setHistory] = useState<string[]>([]);
   const [mode, setMode] = useState<Mode>("brief");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const { currentDataset, loadCSV, unloadCSV, viewCSV } = useCSVHandler(); 
+  const { currentDataset, loadCSV, unloadCSV, viewCSV } = useCSVHandler();
 
   const handleCommand = (command: string) => {
     const [action, ...args] = command.split(" ");
@@ -39,7 +39,7 @@ function App() {
       case "view":
         if (loggedIn && currentDataset != null) {
           const viewResult = viewCSV(currentDataset);
-          console.log("View Result:", viewResult); 
+          console.log("View Result:", viewResult);
           if (viewResult && viewResult !== "No dataset is currently loaded.") {
             addToHistory("CSV displayed");
           } else {
@@ -54,18 +54,18 @@ function App() {
     }
   };
 
-const handleLogin = (username: string, password: string) => {
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-  if (username && password && password.match(passwordRegex)) {
-    setLoggedIn(true);
-    addToHistory("Login successful.");
-  } else {
-    addToHistory(
-      "Error: Invalid username or password. Password must be at least 8 characters long and include one number and one special character."
-    );
-  }
-};
-
+  const handleLogin = (username: string, password: string) => {
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    if (username && password && password.match(passwordRegex)) {
+      setLoggedIn(true);
+      addToHistory("Login successful.");
+    } else {
+      addToHistory(
+        "Error: Invalid username or password. Password must be at least 8 characters long and include one number and one special character."
+      );
+    }
+  };
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -79,8 +79,6 @@ const handleLogin = (username: string, password: string) => {
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "brief" ? "verbose" : "brief"));
   };
-
-  
 
   return (
     <div className="App">
