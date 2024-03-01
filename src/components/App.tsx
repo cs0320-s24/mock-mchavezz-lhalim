@@ -49,25 +49,27 @@ function App() {
           addToHistory("Error: Please log in to access this feature.");
         }
         break;
-        case "search":
-          if (args.length < 2){
-            return "Incorrect search parameters. Please input 'search <column> <value>.";
+      case "search":
+        if (args.length < 2) {
+          addToHistory(
+            "Incorrect search parameters. Please input 'search <column> <value>'."
+          );
+        } else if (loggedIn && currentDataset != null) {
+          const col = parseInt(args[0]);
+          const query = args[1];
+          for (let i = 0; i < currentDataset.data.length; i++) {
+            if (currentDataset.data[i][col] == query) {
+              const found = currentDataset.data[i].toString();
+              addToHistory(found);
+            }
           }
-          if (loggedIn && currentDataset != null) {
-            const col = parseInt(args.join(" ")[0]);
-            const query = args.join(" ")[1];
-            for (let i = 0; i < currentDataset.data.length; i++) {
-              if (currentDataset.data[i][col] == query){
-                addToHistory(currentDataset.data[i].toString())
-              } else{
-                addToHistory("Query not found.")
-              }}
-          } else if (currentDataset == null){
-              addToHistory("Error: No dataset loaded or dataset is empty.");
-            } else if (!loggedIn){
-            addToHistory("Error: Please log in to access this feature.");
-          }
-          break;
+          addToHistory("Search completed.");
+        } else if (currentDataset == null) {
+          addToHistory("Error: No dataset loaded or dataset is empty.");
+        } else if (!loggedIn) {
+          addToHistory("Error: Please log in to access this feature.");
+        }
+        break;
       default:
         addToHistory(`Invalid command: ${command}`);
     }
