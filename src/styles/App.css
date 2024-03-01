@@ -69,7 +69,19 @@
   text-decoration: underline;
 }
 
-.csv-viewer table, th, td {
-  border: 1px solid;
+.csv-viewer table {
+  border-collapse: collapse;
+  width: 100%;
 }
+
+.csv-viewer th, .csv-viewer td {
+  border: 1px solid;
+  padding: 8px; /* Adjust padding as needed */
+  text-align: left; /* Or adjust text alignment as needed */
+}
+
+.csv-viewer th {
+  background-color: #f2f2f2; /* Optional: Add background color to header cells */
+}
+
 
