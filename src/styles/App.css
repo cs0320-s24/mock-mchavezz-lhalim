@@ -69,3 +69,7 @@
   text-decoration: underline;
 }
 
+.csv-viewer table, th, td {
+  border: 1px solid;
+}
+

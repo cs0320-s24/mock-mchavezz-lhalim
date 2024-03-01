@@ -1,4 +1,14 @@
 import { useState } from "react";
+import "/Users/linahalim/Desktop/cs0320/mock-mchavezz-lhalim/src/mocked_dataJson";
+import {
+  mocked_data,
+  mocked_data_2,
+  mocked_data_3,
+  mocked_data_4,
+  mocked_data_5,
+  mocked_data_6,
+} from "../mocked_dataJson";
+import { mock } from "node:test";
 
 export interface Dataset {
   name: string;
@@ -22,13 +32,30 @@ export function useCSVHandler(): REPLFunction {
     null
   );
 
+  const dataMap: { [index: string]: string[][] } = {
+    mocked_data: mocked_data,
+    mocked_data_2: mocked_data_2,
+    mocked_data_3: mocked_data_3,
+    mocked_data_4: mocked_data_4,
+    mocked_data_5: mocked_data_5,
+    mocked_data_6: mocked_data_6,
+  };
+
   const loadCSV = (filePath: string) => {
     // Implement CSV parsing here
     const csvData: string[][] = [
-      ["John", "30"],
-      ["Jane", "25"],
+      ["Apple", "Orange", "Banana"],
+      ["Red", "Blue 2.0", "Green"],
+      ["10000", "100001", "100002"],
+      ["One", "Two", "Three"],
+      ["Sun", "Moon"],
+      ["r", "Table", "Desk"],
+      ["January", "February", "March", "April", "May"],
+      ["Monday", "Tuesday", "Wednesday"],
+      ["Happy", "Happy", "Happy", "Sad"],
+      ["0.9997", "8.4", "-0.9"],
     ];
-    const headers: string[] = ["Name", "Age"]; // Hardcoded for now, replace with CSV parsing logic
+    const headers: string[] = ["0", "1", "2"]; // Hardcoded for now, replace with CSV parsing logic
 
     const newDataset: Dataset = {
       name: filePath,

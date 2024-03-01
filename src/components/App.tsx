@@ -150,7 +150,7 @@ function App() {
           <button onClick={unloadCSV}>Unload Dataset</button>
         </div>
       )}
-      {loggedIn && currentDataset && history.includes("CSV displayed") && (
+      {currentDataset && history.includes("CSV displayed") && (
         <div className="csv-viewer">
           <h2>CSV Viewer</h2>
           {viewCSV(currentDataset)}
