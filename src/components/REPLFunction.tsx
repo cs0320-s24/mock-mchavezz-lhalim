@@ -26,6 +26,7 @@ export interface REPLFunction {
   viewCSV: (props: Dataset) => JSX.Element | string;
 }
 
+
 export function useCSVHandler(): REPLFunction {
   const [loadedDatasets, setLoadedDatasets] = useState<Dataset[]>([]);
   const [currentDatasetIndex, setCurrentDatasetIndex] = useState<number | null>(
@@ -110,6 +111,7 @@ export function useCSVHandler(): REPLFunction {
 
     return "No dataset is currently loaded.";
   };
+
 
   return {
     loadedDatasets,
