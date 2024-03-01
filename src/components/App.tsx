@@ -50,7 +50,7 @@ function App() {
         }
         break;
       case "search":
-        if (args.length < 2) {
+        if (args.length < 2 || args.length > 3) {
           addToHistory(
             "Incorrect search parameters. Please input 'search <column> <value>'."
           );

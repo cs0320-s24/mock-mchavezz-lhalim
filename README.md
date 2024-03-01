@@ -19,6 +19,7 @@ Include the total estimated time it took to complete project
 - Current Dataset display: as only one dataset can be loaded at a time, the current dataset name is displayed
 - Unload CSV button: after a CSV is loaded, not only can the user use the unload_csv command, a button also appears
 
+
 # Errors/Bugs
 
  Write reproduction steps for all the bugs in your program. If the mentor TA finds an error and knows how to reproduce it, they will be able to leave better feedback. If the mentor TA finds the bug without proper documentation, they will assume you did not test your program properly.
